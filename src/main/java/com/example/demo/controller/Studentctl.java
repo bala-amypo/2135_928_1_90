@@ -33,5 +33,5 @@ public class studctl(
         @PathVariable int id,
         @RequestBOdy Studententity st){
     return ser.update(id,st);
-        }
+    }
 }
