@@ -34,4 +34,4 @@ public class studctl(
         @RequestBOdy Studententity st){
     return ser.update(id,st);
     }
-}
+    
