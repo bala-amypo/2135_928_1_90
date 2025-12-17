@@ -10,5 +10,18 @@ public class studctl(
     @Autowired
     private Studservice ser;
     //POST
-    @postMapping("/add")
+    @PostMapping("/add")
+    public Studententity addStudent(@RequestBody student st){
+        return ser.seveData(st);
+
+    }
+    //GET ALL
+    @GetMapping("/getall")
+    public Collection<Studententity>getAllStudents(){
+        return ser.getAll();
+
+    }
+    //GET BY ID
+    @GetMapping("/get/{id}")
+    public Studententity getStudentById(@PathVariable int id)
 )
