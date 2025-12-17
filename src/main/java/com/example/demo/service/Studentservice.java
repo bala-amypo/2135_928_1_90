@@ -9,5 +9,5 @@ public interface StudentService {
     Optional<Studententity>getOneStudent(Long id);
     void deleteStudent(Long id);
     student insertStudententiy(Student st);}
-    
+     
 }
