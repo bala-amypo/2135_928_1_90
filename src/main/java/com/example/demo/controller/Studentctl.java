@@ -12,7 +12,7 @@ public class studctl(
     //POST
     @PostMapping("/add")
     public Studententity addStudent(@RequestBody student st){
-        return ser.seveData(st);
+        return ser.saveData(st);
 
     }
     //GET ALL
@@ -23,5 +23,15 @@ public class studctl(
     }
     //GET BY ID
     @GetMapping("/get/{id}")
-    public Studententity getStudentById(@PathVariable int id)
-)
+    public Studententity getStudentById(@PathVariable int id){
+        return ser.getById(id);
+
+    }
+    //PUT (UPDATE)
+    @PutMapping("/update/{id}")
+    public Studententity updateStudent(
+        @PathVariable int id,
+        @RequestBOdy Studententity st){
+    return ser.update(id,st);
+        }
+}
