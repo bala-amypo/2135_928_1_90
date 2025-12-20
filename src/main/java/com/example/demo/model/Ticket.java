@@ -1,7 +1,16 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.model.Ticket;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
+@Entity
+public class Ticket {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    private LocalDateTime createdAt;
 }
