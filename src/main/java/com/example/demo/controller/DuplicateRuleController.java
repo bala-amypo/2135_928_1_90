@@ -7,22 +7,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/rules")
+@RequestMapping("/rules")
 public class DuplicateRuleController {
 
-    private final DuplicateRuleService service;
+    private final DuplicateRuleService ruleService;
 
-    public DuplicateRuleController(DuplicateRuleService service) {
-        this.service = service;
+    public DuplicateRuleController(DuplicateRuleService ruleService) {
+        this.ruleService = ruleService;
     }
 
     @PostMapping
-    public DuplicateRule create(@RequestBody DuplicateRule rule) {
-        return service.createRule(rule);
+    public DuplicateRule createRule(@RequestBody DuplicateRule rule) {
+        return ruleService.createRule(rule);
     }
 
     @GetMapping
-    public List<DuplicateRule> getAll() {
-        return service.getAllRules();
+    public List<DuplicateRule> getAllRules() {
+        return ruleService.getAllRules();
+    }
+
+    @GetMapping("/{id}")
+    public DuplicateRule getRule(@PathVariable Long id) {
+        return ruleService.getRule(id);
     }
 }

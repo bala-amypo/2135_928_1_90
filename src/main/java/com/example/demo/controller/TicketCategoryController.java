@@ -7,22 +7,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/categories")
 public class TicketCategoryController {
 
-    private final TicketCategoryService service;
+    private final TicketCategoryService categoryService;
 
-    public TicketCategoryController(TicketCategoryService service) {
-        this.service = service;
+    public TicketCategoryController(TicketCategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @PostMapping
-    public TicketCategory create(@RequestBody TicketCategory category) {
-        return service.createCategory(category);
+    public TicketCategory createCategory(@RequestBody TicketCategory category) {
+        return categoryService.createCategory(category);
     }
 
     @GetMapping
-    public List<TicketCategory> getAll() {
-        return service.getAllCategories();
+    public List<TicketCategory> getAllCategories() {
+        return categoryService.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public TicketCategory getCategory(@PathVariable Long id) {
+        return categoryService.getCategory(id);
     }
 }
