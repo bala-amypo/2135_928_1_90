@@ -1,25 +1,28 @@
+package com.example.demo.controller;
+
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.model.Ticket;
+import com.example.demo.repository.TicketRepository;
+
 @RestController
-@RequestMapping("/api/tickets")
+@RequestMapping("/tickets")
 public class TicketController {
 
-    private final TicketRepository ticketRepo;
-    private final DuplicateDetectionService detectionService;
+    private final TicketRepository repo;
 
-    public TicketController(TicketRepository t, DuplicateDetectionService d) {
-        this.ticketRepo = t;
-        this.detectionService = d;
-    }
-
-    @PostMapping
-    public Ticket create(@RequestBody Ticket ticket) {
-        ticket.setCreatedAt(LocalDateTime.now());
-        Ticket saved = ticketRepo.save(ticket);
-        detectionService.detectDuplicates(saved);
-        return saved;
+    public TicketController(TicketRepository repo) {
+        this.repo = repo;
     }
 
     @GetMapping
-    public List<Ticket> all() {
-        return ticketRepo.findAll();
+    public List<Ticket> getTickets() {
+        return repo.findAll();
+    }
+
+    @PostMapping
+    public Ticket addTicket(@RequestBody Ticket ticket) {
+        return repo.save(ticket);
     }
 }

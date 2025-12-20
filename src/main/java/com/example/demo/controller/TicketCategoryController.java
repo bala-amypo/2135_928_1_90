@@ -1,19 +1,28 @@
+package com.example.demo.controller;
+
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.model.TicketCategory;
+import com.example.demo.repository.TicketCategoryRepository;
+
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/categories")
 public class TicketCategoryController {
-    private final TicketCategoryService service;
 
-    public TicketCategoryController(TicketCategoryService service) {
-        this.service = service;
-    }
+    private final TicketCategoryRepository repo;
 
-    @PostMapping
-    public TicketCategory create(@RequestBody TicketCategory c) {
-        return service.create(c);
+    public TicketCategoryController(TicketCategoryRepository repo) {
+        this.repo = repo;
     }
 
     @GetMapping
-    public List<TicketCategory> all() {
-        return service.all();
+    public List<TicketCategory> getAll() {
+        return repo.findAll();
+    }
+
+    @PostMapping
+    public TicketCategory save(@RequestBody TicketCategory c) {
+        return repo.save(c);
     }
 }
