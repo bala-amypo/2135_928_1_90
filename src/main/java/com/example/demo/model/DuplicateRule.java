@@ -1,40 +1,23 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import java.time.LocalDateTime;
 
 @Entity
 public class DuplicateRule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
+    @Column(unique = true)
     private String ruleName;
+
+    private String matchType;
     private Double threshold;
 
-    public DuplicateRule() {}
-
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRuleName() {
-        return ruleName;
-    }
-    
-    public void setRuleName(String ruleName) {
-        this.ruleName = ruleName;
-    }
-
-    public Double getThreshold() {
-        return threshold;
-    }
-    
-    public void setThreshold(Double threshold) {
-        this.threshold = threshold;
-    }
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

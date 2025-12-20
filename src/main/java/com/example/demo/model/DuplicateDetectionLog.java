@@ -1,42 +1,25 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 public class DuplicateDetectionLog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
-
-    private Double similarityScore;
 
     @ManyToOne
     private Ticket ticket;
 
-    public DuplicateDetectionLog() {}
+    @ManyToOne
+    private Ticket matchedTicket;
 
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Double matchScore;
 
-    public Double getSimilarityScore() {
-        return similarityScore;
-    }
-    
-    public void setSimilarityScore(Double similarityScore) {
-        this.similarityScore = similarityScore;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-    
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
+    private LocalDateTime detectedAt = LocalDateTime.now();
 }
