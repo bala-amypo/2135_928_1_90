@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class User {
@@ -11,5 +10,4 @@ public class User {
     private Long id;
 
     private String username;
-    private LocalDateTime createdAt;
 }

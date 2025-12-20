@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Ticket;
@@ -17,12 +18,12 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getTickets() {
+    public List<Ticket> getAll() {
         return repo.findAll();
     }
 
     @PostMapping
-    public Ticket addTicket(@RequestBody Ticket ticket) {
+    public Ticket save(@RequestBody Ticket ticket) {
         return repo.save(ticket);
     }
 }
