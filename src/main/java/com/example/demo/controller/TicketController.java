@@ -16,18 +16,14 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("/user/{userId}/category/{categoryId}")
-    public Ticket createTicket(
-            @PathVariable Long userId,
-            @PathVariable Long categoryId,
-            @RequestBody Ticket ticket
-    ) {
-        return ticketService.createTicket(userId, categoryId, ticket);
+    @PostMapping
+    public Ticket createTicket(@RequestBody Ticket ticket) {
+        return ticketService.createTicket(ticket);
     }
 
-    @GetMapping("/{ticketId}")
-    public Ticket getTicket(@PathVariable Long ticketId) {
-        return ticketService.getTicket(ticketId);
+    @GetMapping("/{id}")
+    public Ticket getTicket(@PathVariable Long id) {
+        return ticketService.getTicket(id);
     }
 
     @GetMapping("/user/{userId}")
@@ -35,8 +31,8 @@ public class TicketController {
         return ticketService.getTicketsByUser(userId);
     }
 
-    @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketService.getAllTickets();
+    @DeleteMapping("/{id}")
+    public void deleteTicket(@PathVariable Long id) {
+        ticketService.deleteTicket(id);
     }
 }
