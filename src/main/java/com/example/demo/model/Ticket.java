@@ -11,6 +11,9 @@ public class Ticket {
     private Long id;
 
     private String title;
-
+    private String description;
     private LocalDateTime createdAt;
+
+    public Long getId() { return id; }
+    public String getDescription() { return description; }
 }
