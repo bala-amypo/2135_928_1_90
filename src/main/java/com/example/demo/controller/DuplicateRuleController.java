@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rules")
+@RequestMapping("/duplicate-rules")
 public class DuplicateRuleController {
 
     private final DuplicateRuleService ruleService;
@@ -17,17 +17,22 @@ public class DuplicateRuleController {
     }
 
     @PostMapping
-    public DuplicateRule createRule(@RequestBody DuplicateRule rule) {
+    public DuplicateRule create(@RequestBody DuplicateRule rule) {
         return ruleService.createRule(rule);
     }
 
     @GetMapping
-    public List<DuplicateRule> getAllRules() {
+    public List<DuplicateRule> getAll() {
         return ruleService.getAllRules();
     }
 
     @GetMapping("/{id}")
-    public DuplicateRule getRule(@PathVariable Long id) {
-        return ruleService.getRule(id);
+    public DuplicateRule get(@PathVariable Long id) {
+        return ruleService.getRuleById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        ruleService.deleteRule(id);
     }
 }

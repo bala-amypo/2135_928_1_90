@@ -1,25 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.model.TicketCategory;
-import com.example.demo.repository.TicketCategoryRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class TicketCategoryService {
+public interface TicketCategoryService {
 
-    private final TicketCategoryRepository repository;
+    TicketCategory createCategory(TicketCategory category);
 
-    public TicketCategoryService(TicketCategoryRepository repository) {
-        this.repository = repository;
-    }
+    List<TicketCategory> getAllCategories();
 
-    public TicketCategory createCategory(TicketCategory category) {
-        return repository.save(category);
-    }
+    TicketCategory getCategory(Long id);
 
-    public List<TicketCategory> getAllCategories() {
-        return repository.findAll();
-    }
+    void deleteCategory(Long id);
 }
