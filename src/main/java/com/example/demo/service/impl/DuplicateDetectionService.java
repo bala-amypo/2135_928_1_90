@@ -30,12 +30,12 @@ public class DuplicateDetectionService {
 
         for (Ticket oldTicket : existingTickets) {
 
-            // Skip same ticket
+            
             if (oldTicket.getId().equals(newTicket.getId())) {
                 continue;
             }
 
-            // Calculate similarity score
+            
             double score = TextSimilarityUtil.similarity(
                     newTicket.getDescription(),
                     oldTicket.getDescription()
@@ -55,12 +55,12 @@ public class DuplicateDetectionService {
         }
     }
 
-    // Get all detection logs
+    
     public List<DuplicateDetectionLog> getAllLogs() {
         return logRepository.findAll();
     }
 
-    // Get logs for a ticket
+   
     public List<DuplicateDetectionLog> getLogsForTicket(Long ticketId) {
         return logRepository.findAll()
                 .stream()
