@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
+import com.example.demo.model.DuplicateDetectionLog;
 import com.example.demo.model.Ticket;
+
 import java.util.List;
 
 public interface DuplicateDetectionService {
 
-    boolean isDuplicateTicket(Ticket ticket);
+    List<DuplicateDetectionLog> detectDuplicate(Ticket ticket);
 
-    void detectDuplicates(Long ticketId);
+    List<DuplicateDetectionLog> getAllLogs();
 
-    List<String> getLogsForTicket(Long ticketId);
-
-    String getLog(Long logId);
+    DuplicateDetectionLog getLogById(Long id);
 }

@@ -1,31 +1,50 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.DuplicateDetectionLog;
 import com.example.demo.model.Ticket;
+import com.example.demo.repository.DuplicateDetectionLogRepository;
 import com.example.demo.service.DuplicateDetectionService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DuplicateDetectionServiceImpl implements DuplicateDetectionService {
 
-    @Override
-    public boolean isDuplicateTicket(Ticket ticket) {
-        return false;
+    private final DuplicateDetectionLogRepository logRepository;
+
+    public DuplicateDetectionServiceImpl(DuplicateDetectionLogRepository logRepository) {
+        this.logRepository = logRepository;
     }
 
     @Override
-    public void detectDuplicates(Long ticketId) {
-        // duplicate detection logic
+    public List<DuplicateDetectionLog> detectDuplicate(Ticket ticket) {
+
+        List<DuplicateDetectionLog> logs = new ArrayList<>();
+
+        // Example logic (replace with real rule checks later)
+        if (ticket.getTitle() != null && ticket.getTitle().length() > 5) {
+            DuplicateDetectionLog log = new DuplicateDetectionLog();
+            log.setTicket(ticket);
+            log.setMessage("Possible duplicate detected based on title");
+            log.setDetectedAt(LocalDateTime.now());
+
+            logs.add(logRepository.save(log));
+        }
+
+        return logs;
     }
 
     @Override
-    public List<String> getLogsForTicket(Long ticketId) {
-        return List.of("No duplicates found");
+    public List<DuplicateDetectionLog> getAllLogs() {
+        return logRepository.findAll();
     }
 
     @Override
-    public String getLog(Long logId) {
-        return "Log details";
+    public DuplicateDetectionLog getLogById(Long id) {
+        return logRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("DuplicateDetectionLog not found with id " + id));
     }
 }
