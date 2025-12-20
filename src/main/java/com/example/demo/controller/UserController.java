@@ -1,19 +1,15 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
-    private final UserService service;
-
-    public UserController(UserService service) {
-        this.service = service;
-    }
-
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return service.register(user);
-    }
 
     @GetMapping
-    public List<User> all() {
-        return service.all();
+    public List<String> getUsers() {
+        return List.of("User1", "User2");
     }
 }
