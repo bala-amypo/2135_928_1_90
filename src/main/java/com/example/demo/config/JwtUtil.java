@@ -16,7 +16,7 @@ public class JwtUtil {
     // Token validity: 1 hour
     private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 1000;
 
-    // Secret key (must be at least 256 bits for HS256)
+    // Secret key (HS256 requires >= 256 bits)
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     // =========================
@@ -58,7 +58,7 @@ public class JwtUtil {
     // =========================
     public boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
+        return extractedUsername.equals(username) && !isTokenExpired(token);
     }
 
     // =========================
@@ -66,3 +66,13 @@ public class JwtUtil {
     // =========================
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
