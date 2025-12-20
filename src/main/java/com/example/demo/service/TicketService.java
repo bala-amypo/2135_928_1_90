@@ -1,30 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Ticket;
-import com.example.demo.repository.TicketRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-@Service
-public class TicketService {
+public interface TicketService {
 
-    private final TicketRepository ticketRepository;
-    private final DuplicateDetectionService detectionService;
+    Ticket createTicket(Ticket ticket);
 
-    public TicketService(TicketRepository ticketRepository,
-                         DuplicateDetectionService detectionService) {
-        this.ticketRepository = ticketRepository;
-        this.detectionService = detectionService;
-    }
+    List<Ticket> getAllTickets();
 
-    public Ticket createTicket(Ticket ticket) {
-        Ticket saved = ticketRepository.save(ticket);
-        detectionService.runDetection(saved.getId());
-        return saved;
-    }
+    Ticket getTicketById(Long id);
 
-    public List<Ticket> getAllTickets() {
-        return ticketRepository.findAll();
-    }
+    void deleteTicket(Long id);
 }
