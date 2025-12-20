@@ -1,43 +1,26 @@
-package com.example.demo.service;
+package com.example.demo.serviceImpl;
 
-import com.example.demo.model.DuplicateDetectionLog;
 import com.example.demo.model.Ticket;
-import com.example.demo.repository.DuplicateDetectionLogRepository;
 import com.example.demo.repository.TicketRepository;
-import com.example.demo.util.TextSimilarityUtil;
+import com.example.demo.service.DuplicateDetectionService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class DuplicateDetectionService {
+public class DuplicateDetectionServiceImpl implements DuplicateDetectionService {
 
     private final TicketRepository ticketRepository;
-    private final DuplicateDetectionLogRepository logRepository;
 
-    public DuplicateDetectionService(TicketRepository ticketRepository,
-                                     DuplicateDetectionLogRepository logRepository) {
+    public DuplicateDetectionServiceImpl(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
-        this.logRepository = logRepository;
     }
 
-    public void runDetection(Long ticketId) {
-        Ticket newTicket = ticketRepository.findById(ticketId).orElseThrow();
-        List<Ticket> tickets = ticketRepository.findAll();
-
-        for (Ticket t : tickets) {
-            if (!t.getId().equals(ticketId)) {
-                double score = TextSimilarityUtil.similarity(
-                        newTicket.getDescription(), t.getDescription());
-
-                if (score >= 0.5) {
-                    DuplicateDetectionLog log = new DuplicateDetectionLog();
-                    log.setTicket(newTicket);
-                    log.setMatchedTicket(t);
-                    log.setMatchScore(score);
-                    logRepository.save(log);
-                }
-            }
-        }
+    @Override
+    public boolean isDuplicateTicket(Ticket ticket) {
+        return ticketRepository.findAll()
+                .stream()
+                .anyMatch(t ->
+                        t.getTitle().equalsIgnoreCase(ticket.getTitle()) &&
+                        t.getDescription().equalsIgnoreCase(ticket.getDescription())
+                );
     }
 }
