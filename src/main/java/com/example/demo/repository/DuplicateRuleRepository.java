@@ -1,0 +1,1 @@
+public interface DuplicateRuleRepository extends JpaRepository<DuplicateRule, Long> {}

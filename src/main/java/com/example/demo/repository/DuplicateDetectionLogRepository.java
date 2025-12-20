@@ -1,0 +1,1 @@
+public interface DuplicateDetectionLogRepository extends JpaRepository<DuplicateDetectionLog, Long> {}

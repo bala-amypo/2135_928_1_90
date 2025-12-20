@@ -1,0 +1,1 @@
+public interface TicketCategoryRepository extends JpaRepository<TicketCategory, Long> {}
