@@ -1,16 +1,7 @@
-@Entity
-public class Ticket {
-    @Id @GeneratedValue
-    private Long id;
+package com.example.demo.repository;
 
-    @ManyToOne
-    private User user;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.model.Ticket;
 
-    @ManyToOne
-    private TicketCategory category;
-
-    private String subject;
-    private String description;
-    private String status = "OPEN";
-    private LocalDateTime createdAt;
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
 }
