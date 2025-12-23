@@ -2,10 +2,7 @@ package com.example.demo.util;
 
 public class TextSimilarityUtil {
 
-    /**
-     * Calculates similarity between two text strings.
-     * Returns a value between 0.0 and 1.0
-     */
+    
     public static double similarity(String s1, String s2) {
 
         if (s1 == null || s2 == null) {

@@ -18,9 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // =========================
-    // UserDetailsService
-    // =========================
+   
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         return new InMemoryUserDetailsManager(
@@ -31,26 +29,20 @@ public class SecurityConfig {
         );
     }
 
-    // =========================
-    // Password Encoder
-    // =========================
+  
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // =========================
-    // Authentication Manager
-    // =========================
+  
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    // =========================
-    // Security Filter Chain
-    // =========================
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
