@@ -13,8 +13,7 @@ public class DuplicateRule {
     @Column(unique = true)
     private String ruleName;
 
-    private String matchType; // KEYWORD / SIMILARITY / EXACT_MATCH
-
+    private String matchType; 
     private Double threshold;
 
     private LocalDateTime createdAt;
@@ -24,7 +23,7 @@ public class DuplicateRule {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters & Setters
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
