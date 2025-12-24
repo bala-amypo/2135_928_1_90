@@ -12,15 +12,10 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-
- 
     private static final long JWT_TOKEN_VALIDITY = 60 * 60 * 1000;
-
-    
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
-   
-    public String generateToken(String username) {
+    
+     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
