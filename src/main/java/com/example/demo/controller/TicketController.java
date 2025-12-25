@@ -22,7 +22,6 @@ public class TicketController {
     public List<Ticket> getTicketsByUser(@PathVariable Long userId) {
         return ticketService.getTicketsByUser(userId);
     }
-
     @DeleteMapping("/{id}")
     public void deleteTicket(@PathVariable Long id) {
         ticketService.deleteTicket(id);
