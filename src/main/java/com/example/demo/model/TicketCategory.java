@@ -1,20 +1,14 @@
 package com.example.demo.model;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
 @Entity
 public class TicketCategory {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String categoryName;
-
     private String description;
-
     private LocalDateTime createdAt;
 
     @PrePersist
