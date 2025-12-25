@@ -14,18 +14,15 @@ public class DuplicateRuleServiceImpl implements DuplicateRuleService {
     public DuplicateRule createRule(DuplicateRule rule) {
     return duplicateRuleRepository.save(rule);
     }
-
     @Override
     public List<DuplicateRule> getAllRules() {
         return duplicateRuleRepository.findAll();
     }
-
     @Override
     public DuplicateRule getRuleById(Long id) {
         return duplicateRuleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("DuplicateRule not found with id " + id));
     }
-
     @Override
     public void deleteRule(Long id) {
         duplicateRuleRepository.deleteById(id);
