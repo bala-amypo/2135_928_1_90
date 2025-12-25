@@ -21,10 +21,11 @@ return repository.findAll();
 @Override
 public TicketCategory getCategory(Long id) {
     return repository.findById(id)
-    .orElseThrow(() -> new RuntimeException("Category not found"));
-    }
-    @Override
-    public void deleteCategory(Long id) {
-        repository.deleteById(id);
-    }
-}
+        .orElseThrow(() -> new RuntimeException("Category not found"));
+            }
+                @Override
+                    public void deleteCategory(Long id) {
+                            repository.deleteById(id);
+                                }
+                                }
+                                
