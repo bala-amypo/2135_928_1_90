@@ -33,26 +33,22 @@ public class SecurityConfig {
                 AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**",
-                                "/swagger-ui.html"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .httpBasic();
-
+    http
+    .csrf(csrf -> csrf.disable())
+    .sessionManagement(session ->
+    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    )
+    .authorizeHttpRequests(auth -> auth
+    .requestMatchers(
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/swagger-ui.html"
+        ).permitAll()
+        .anyRequest().authenticated()
+        )
+        .httpBasic();
         return http.build();
     }
 }
