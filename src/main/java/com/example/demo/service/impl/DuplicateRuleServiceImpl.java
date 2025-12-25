@@ -7,12 +7,12 @@ import java.util.List;
 @Service
 public class DuplicateRuleServiceImpl implements DuplicateRuleService {
     private final DuplicateRuleRepository duplicateRuleRepository;
-    public DuplicateRuleServiceImpl(DuplicateRuleRepository duplicateRuleRepository) {this.duplicateRuleRepository = duplicateRuleRepository;
+    public DuplicateRuleServiceImpl(DuplicateRuleRepository duplicateRuleRepository) {
+    this.duplicateRuleRepository = duplicateRuleRepository;
     }
-
     @Override
     public DuplicateRule createRule(DuplicateRule rule) {
-        return duplicateRuleRepository.save(rule);
+    return duplicateRuleRepository.save(rule);
     }
 
     @Override
