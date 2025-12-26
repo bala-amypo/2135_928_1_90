@@ -5,43 +5,43 @@ import com.example.demo.model.DuplicateRule;
 import com.example.demo.repository.DuplicateRuleRepository;
 import com.example.demo.service.DuplicateRuleService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@Transactional
 public class DuplicateRuleServiceImpl implements DuplicateRuleService {
+    private final DuplicateRuleRepository ruleRepository;
 
-    private final DuplicateRuleRepository repository;
-
-    public DuplicateRuleServiceImpl(DuplicateRuleRepository repository) {
-        this.repository = repository;
+    public DuplicateRuleServiceImpl(DuplicateRuleRepository ruleRepository) {
+        this.ruleRepository = ruleRepository;
     }
 
     @Override
     public DuplicateRule createRule(DuplicateRule rule) {
-
-        if (repository.findByRuleName(rule.getRuleName()).isPresent()) {
-            throw new IllegalArgumentException("rule already exists");
+        if (rule.getRuleName() == null || rule.getRuleName().isBlank()) {
+            throw new IllegalArgumentException("Rule name is required");
         }
-
-        if (rule.getThreshold() < 0.0 || rule.getThreshold() > 1.0) {
-            throw new IllegalArgumentException("invalid threshold");
+        if (ruleRepository.findByRuleName(rule.getRuleName()).isPresent()) {
+            throw new IllegalArgumentException("Rule with this name already exists");
         }
-
-        return repository.save(rule);
-    }
-
-    @Override
-    public List<DuplicateRule> getAllRules() {
-        return repository.findAll();
+        if (rule.getThreshold() == null || rule.getThreshold() < 0.0 || rule.getThreshold() > 1.0) {
+            throw new IllegalArgumentException("Threshold must be between 0.0 and 1.0");
+        }
+        if (rule.getCreatedAt() == null) {
+            rule.setCreatedAt(LocalDateTime.now());
+        }
+        return ruleRepository.save(rule);
     }
 
     @Override
     public DuplicateRule getRule(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() ->
-                        new NotFoundException("Rule not found"));
+        return ruleRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("Rule not found"));
+    }
+
+    @Override
+    public List<DuplicateRule> getAllRules() {
+        return ruleRepository.findAll();
     }
 }
