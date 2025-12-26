@@ -7,24 +7,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserService service;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService service) {
+        this.service = service;
     }
-    @PostMapping
-    public User registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return service.getAllUsers();
     }
+
     @GetMapping("/{id}")
     public User getUser(@PathVariable Long id) {
-        return userService.getUser(id);
-    }
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+        return service.getUser(id);
     }
 }
