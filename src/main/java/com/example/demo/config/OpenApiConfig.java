@@ -14,6 +14,6 @@ public class OpenApiConfig {
         return new OpenAPI()
                 
                         new Server().url("https://9149.408procr.amypo.ai")
-                ));
+                ;
         }
 }
